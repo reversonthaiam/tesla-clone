@@ -1,11 +1,17 @@
+import { createGlobalStyle } from 'styled-components'
+
+export const GlobalStyles = createGlobalStyle`
 * {
   margin: 0;
-
+}
+a {
+  text-decoration: none;
+  cursor: pointer;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Gotham' ,-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -16,3 +22,5 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+`
