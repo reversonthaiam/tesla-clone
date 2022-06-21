@@ -9,33 +9,47 @@ import { login } from '../../features/userSlice'
 import {
   Container,
   Form,
-  LoginDivider,
-  LoginHeader,
-  LoginInfo,
-  LoginLanguage,
-  LoginLogo,
+  SignupDivider,
+  SignupHeader,
+  SignupInfo,
+  SignupLanguage,
+  SignupLogo,
 } from './styles'
 
 function Signup() {
   const [email, setEmail] = useState('')
+  const [fName, setfName] = useState('')
+  const [lName, setlName] = useState('')
   const [password, setPassoword] = useState('')
   const dispatch = useDispatch()
   const history = useHistory()
 
-  const signIn = (e) => {
+  const signUp = (e) => {
     e.preventDefault()
 
+    if (!fName) return alert('Please enter a first name!')
+    if (!lName) return alert('Please enter a last name!')
+    if (!email) return alert('Please enter a e-mail!')
+    if (!password) return alert('Please enter a password!')
+
     auth
-      .signInWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(email, password)
       .then((userAuth) => {
-        dispatch(
-          login({
-            email: userAuth.user.email,
-            displayName: userAuth.user.displayName,
-            uid: userAuth.user.uid,
-          }),
-        )
-        history.push('/teslaaccount')
+        userAuth.user
+          .updateProfile({
+            displayName: fName,
+          })
+          .then(() => {
+            dispatch(
+              login({
+                email: userAuth.user.email,
+                uid: userAuth.user.uid,
+                displayName: userAuth.user.fName,
+              }),
+            )
+
+            history.push('/teslaaccount')
+          })
       })
       .catch((error) => {
         alert(error.message)
@@ -44,25 +58,41 @@ function Signup() {
 
   return (
     <Container>
-      <LoginHeader>
-        <LoginLogo>
+      <SignupHeader>
+        <SignupLogo>
           <Link to="/">
             <img
               src="https://assets.website-files.com/5e8fceb1c9af5c3915ec97a0/5ec2f037975ed372da9f6286_Tesla-Logo-PNG-HD.png"
               alt="Logo"
             />
           </Link>
-        </LoginLogo>
+        </SignupLogo>
 
-        <LoginLanguage>
+        <SignupLanguage>
           <LanguageOutlinedIcon />
           <span>en-US</span>
-        </LoginLanguage>
-      </LoginHeader>
+        </SignupLanguage>
+      </SignupHeader>
 
-      <LoginInfo>
-        <h1>Sign in</h1>
+      <SignupInfo>
+        <h1>Create account</h1>
         <Form>
+          <label htmlFor="fName">Fist name</label>
+          <input
+            type="text"
+            id="fName"
+            value={fName}
+            onChange={(e) => setfName(e.target.value)}
+          />
+
+          <label htmlFor="lName">Last name</label>
+          <input
+            type="text"
+            id="lName"
+            value={lName}
+            onChange={(e) => setlName(e.target.value)}
+          />
+
           <label htmlFor="email">E-mail</label>
           <input
             type="email"
@@ -80,20 +110,20 @@ function Signup() {
           />
 
           <ButtonPrimary
-            name="Sign In"
+            name="Create account"
             type="submit"
-            onClick={signIn}
+            onClick={signUp}
           ></ButtonPrimary>
         </Form>
 
-        <LoginDivider>
+        <SignupDivider>
           <hr /> <span>OR</span> <hr />
-        </LoginDivider>
+        </SignupDivider>
 
-        <Link to="/signup">
-          <ButtonSecondary name="Create account"></ButtonSecondary>
+        <Link to="/login">
+          <ButtonSecondary name="Sign in"></ButtonSecondary>
         </Link>
-      </LoginInfo>
+      </SignupInfo>
     </Container>
   )
 }

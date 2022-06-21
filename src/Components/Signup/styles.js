@@ -9,7 +9,7 @@ export const Container = styled.div`
   gap: 70px;
 `
 
-export const LoginHeader = styled.div`
+export const SignupHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -17,7 +17,7 @@ export const LoginHeader = styled.div`
   top: 0;
 `
 
-export const LoginLogo = styled.div`
+export const SignupLogo = styled.div`
   a {
     img {
       object-fit: contain;
@@ -26,7 +26,7 @@ export const LoginLogo = styled.div`
   }
 `
 
-export const LoginLanguage = styled.div`
+export const SignupLanguage = styled.div`
   display: flex;
   gap: 5px;
   align-items: center;
@@ -45,7 +45,7 @@ export const LoginLanguage = styled.div`
   }
 `
 
-export const LoginInfo = styled.div`
+export const SignupInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -56,8 +56,14 @@ export const LoginInfo = styled.div`
   h1 {
     font-weight: 500;
     font-size: 40px;
-    margin-left: -10px;
+    margin-left: -60px;
 
+  }
+
+  a {
+    button{
+      margin-bottom: 80px;
+    }
   }
 `
 
@@ -90,7 +96,7 @@ export const Form = styled.form`
   }
 
 `
-export const LoginDivider = styled.div`
+export const SignupDivider = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;

@@ -56,7 +56,7 @@ export const LoginInfo = styled.div`
   h1 {
     font-weight: 500;
     font-size: 40px;
-    margin-left: -10px;
+    margin-left: -60px;
 
   }
 `
